@@ -1,24 +1,29 @@
 #include "simplegraph.h"
 
-SimpleGraph::SimpleGraph(const QString &label, const QString &postfix, QColor color, QCustomPlot *qcp, QCPAxis *yAxis, int precision, bool scientificNotation)
+SimpleGraph::SimpleGraph(const QString &label, Style style, const QString &postfix, QColor color, QCustomPlot *qcp, QCPAxis *yAxis, int precision, bool scientificNotation)
     :AbstractGraph(label, postfix, color, qcp, precision, scientificNotation)
 {
     _yAxis = yAxis;
     _graph = qcp->addGraph(qcp->xAxis, yAxis);
     _graph->setName(label);
 
-    _graph->setLineStyle(QCPGraph::LineStyle::lsNone);
-    _graph->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 6));
-    _graph->setAdaptiveSampling(true);
-
-
     QPen pen;
     pen.setColor(color);
     pen.setWidth(1);
     _graph->setPen(pen);
-    _graph->setBrush(color);
 
+    if (style == Style::dot) {
+        _graph->setLineStyle(QCPGraph::LineStyle::lsNone);
+        _graph->setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 6));
+        _graph->setBrush(color);
+    }
+
+    if (style == Style::line) {
+        _graph->setLineStyle(QCPGraph::LineStyle::lsStepLeft);
+    }
+    _graph->setAdaptiveSampling(true);
 }
+
 
 //SimpleGraph::~SimpleGraph()
 //{

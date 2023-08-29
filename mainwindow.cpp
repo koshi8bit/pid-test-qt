@@ -8,28 +8,24 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    pid = new PID(0.1, -100, 100, 0.1, 0.5, 0.1);
-    targetPlot = ui->plot->addGraph("target");
-    currentValPlot = ui->plot->addGraph("current val");
-    deltaPlot = ui->plot->addGraph("delta");
+    pid = new PID(0.1, -100, 100,
+                  ui->doubleSpinBoxP->value(),
+                  ui->doubleSpinBoxI->value(),
+                  ui->doubleSpinBoxD->value());
 
-    double currentVal = 20;
-    double target = 0;
 
-    target = 10;
 
-    for (int i = 100; i < 200; i++) {
-        double delta = pid->calc(target, currentVal);
-        //printf("val:% 7.3f inc:% 7.3f\n", val, inc);
-        qDebug() << "val" << currentVal << "delta" << delta;
-        currentVal += delta;
+    targetPlot = ui->plot->addGraph("target", SimpleGraph::line);
+    currentValPlot = ui->plot->addGraph("current val", SimpleGraph::line);
+    deltaPlot = ui->plot->addGraph("delta", SimpleGraph::line);
 
-        targetPlot->addData(i, target);
-        currentValPlot->addData(i, currentVal);
-        deltaPlot->addData(i, delta);
+    go();
 
-    }
-    qDebug() << "jj";
+    oneSet(ui->doubleSpinBoxEnd1->value(),
+           ui->doubleSpinBoxEnd2->value());
+
+    ui->plot->autoScaleAllAxis();
+    //ui->plot->setSplitterWidth(200);
 }
 
 MainWindow::~MainWindow()
@@ -37,25 +33,48 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
-
 void MainWindow::on_pushButtonGo_clicked()
 {
-
+    go();
 }
 
-void MainWindow::oneSet(double start, double end)
+void MainWindow::oneSet(double start, double target)
 {
-    for (int i = 0; i < 100; i++) {
-        double delta = pid->calc(start, start);
-        //printf("val:% 7.3f inc:% 7.3f\n", val, inc);
-        //qDebug() << "val" << currentVal << "delta" << delta;
-        start += delta;
+    auto currVal = start;
+    auto n = 100;
+    for (int i = 0; i < n; i++) {
+        double delta = pid->calc(target, currVal);
+        currVal += delta;
 
-        targetPlot->addData(i, start);
-        currentValPlot->addData(i, start);
-        deltaPlot->addData(i, delta);
+        targetPlot->addData(i+x, target);
+        currentValPlot->addData(i+x, currVal);
+        deltaPlot->addData(i+x, delta);
     }
+    x += n;
+}
 
+void MainWindow::go()
+{
+    oneSet(ui->doubleSpinBoxStart->value(),
+           ui->doubleSpinBoxEnd1->value());
+    ui->plot->autoScaleAllAxis();
+}
+
+
+void MainWindow::on_doubleSpinBoxP_valueChanged(double arg1)
+{
+    pid->setP(arg1);
+}
+
+
+void MainWindow::on_doubleSpinBoxI_valueChanged(double arg1)
+{
+    pid->setI(arg1);
+}
+
+
+void MainWindow::on_doubleSpinBoxD_valueChanged(double arg1)
+{
+    pid->setD(arg1);
 }
 

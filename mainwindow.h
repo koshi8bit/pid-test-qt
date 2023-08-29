@@ -4,6 +4,7 @@
 
 #include <QMainWindow>
 #include <QDebug>
+#include "lib/koshi8bit/ui/plots/simple/simplegraph.h"
 #include "pid.h"
 
 
@@ -24,12 +25,19 @@ public:
 private slots:
     void on_pushButtonGo_clicked();
 
+    void on_doubleSpinBoxP_valueChanged(double arg1);
+
+    void on_doubleSpinBoxI_valueChanged(double arg1);
+
+    void on_doubleSpinBoxD_valueChanged(double arg1);
+
 private:
     Ui::MainWindow *ui;
     PID *pid;
-    void oneSet(double start, double end);
+    void oneSet(double start, double target);
+    void go();
     int x=0;
-    SimplePlot *targetPlot, *currentValPlot, *deltaPlot;
+    SimpleGraph *targetPlot, *currentValPlot, *deltaPlot;
 };
 
 #endif // MAINWINDOW_H

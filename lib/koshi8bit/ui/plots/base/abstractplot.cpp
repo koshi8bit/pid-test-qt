@@ -30,6 +30,14 @@ AbstractPlot::~AbstractPlot()
     delete ui;
 }
 
+void AbstractPlot::autoScaleAllAxis()
+{
+    autoScaleAxis(qcp()->xAxis);
+    autoScaleAxis(qcp()->yAxis);
+    autoScaleAxis(qcp()->xAxis2);
+    autoScaleAxis(qcp()->yAxis2);
+}
+
 void AbstractPlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)
 {
     Q_UNUSED(part)
@@ -47,6 +55,10 @@ void AbstractPlot::axisDoubleClick(QCPAxis *axis, QCPAxis::SelectablePart part, 
 
 void AbstractPlot::autoScaleAxis(QCPAxis *axis)
 {
+    if (axis == nullptr) {
+        return;
+    }
+
     axis->rescale(true);
     auto delta = (axis->range().upper - axis->range().lower)*0.05; // 5%
     axis->setRange(axis->range().lower - delta, axis->range().upper + delta);

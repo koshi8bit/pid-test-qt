@@ -2,7 +2,7 @@
 
 
 ErrorYGraph::ErrorYGraph(const QString &label, const QString &postfix, QColor color, QCustomPlot *qcp, QCPAxis *yAxis, int precision, bool scientificNotation)
-    :SimpleGraph(label, postfix, color, qcp, yAxis, precision, scientificNotation)
+    :SimpleGraph(label, Style::dot, postfix, color, qcp, yAxis, precision, scientificNotation)
 {
     auto pen = _graph->pen();
     pen.setStyle(Qt::PenStyle::SolidLine);

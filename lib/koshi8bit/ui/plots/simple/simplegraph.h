@@ -6,9 +6,16 @@
 class SimpleGraph: public AbstractGraph
 {
 public:
-    SimpleGraph(const QString &label, const QString &postfix, QColor color,
+    enum Style {
+        line,
+        dot
+    };
+    Q_ENUMS(Style)
+
+    SimpleGraph(const QString &label, Style style, const QString &postfix, QColor color,
                 QCustomPlot *qcp, QCPAxis *yAxis, int precision = 3,
                 bool scientificNotation = false);
+
 
     //~SimpleGraph() override;
     void addData(double x, double y);

@@ -8,9 +8,10 @@ SimplePlot::SimplePlot(QWidget *parent)
     configurePlotBackground(true);
 }
 
-SimpleGraph *SimplePlot::addGraph(const QString &label, const QString &postfix, bool yAxis2, int precision, bool scientificNotation)
+SimpleGraph *SimplePlot::addGraph(const QString &label, SimpleGraph::Style style, const QString &postfix, bool yAxis2, int precision, bool scientificNotation)
 {
     auto graph = new SimpleGraph(label,
+                                 style,
                                  postfix,
                                  colorSetter.getColor(),
                                  qcp(),

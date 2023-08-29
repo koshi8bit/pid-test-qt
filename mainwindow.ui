@@ -34,6 +34,9 @@
           <property name="prefix">
            <string>start: </string>
           </property>
+          <property name="value">
+           <double>20.000000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
@@ -58,6 +61,9 @@
           <property name="prefix">
            <string>end2: </string>
           </property>
+          <property name="value">
+           <double>10.000000000000000</double>
+          </property>
          </widget>
         </item>
        </layout>
@@ -74,10 +80,13 @@
           <property name="prefix">
            <string>P </string>
           </property>
+          <property name="value">
+           <double>0.100000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBoxPI">
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxI">
           <property name="font">
            <font>
             <family>Consolas</family>
@@ -86,10 +95,13 @@
           <property name="prefix">
            <string>I </string>
           </property>
+          <property name="value">
+           <double>0.500000000000000</double>
+          </property>
          </widget>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="doubleSpinBoxPIP">
+         <widget class="QDoubleSpinBox" name="doubleSpinBoxD">
           <property name="font">
            <font>
             <family>Consolas</family>
@@ -97,6 +109,9 @@
           </property>
           <property name="prefix">
            <string>D </string>
+          </property>
+          <property name="value">
+           <double>0.100000000000000</double>
           </property>
          </widget>
         </item>

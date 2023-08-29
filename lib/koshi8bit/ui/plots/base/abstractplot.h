@@ -21,6 +21,8 @@ class AbstractPlot : public QWidget
 
 public:
     static void autoScaleAxis(QCPAxis *axis);
+    void autoScaleAllAxis();
+
     explicit AbstractPlot(QWidget *parent = nullptr);
     ~AbstractPlot();
 
