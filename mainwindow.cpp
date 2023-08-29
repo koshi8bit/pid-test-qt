@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     ui->doubleSpinBoxCursorP->setValue(0.1);
+    ui->doubleSpinBoxCursorP->setDecimals(4);
     ui->doubleSpinBoxCursorP->setPrefix("P ");
     ui->doubleSpinBoxCursorP->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorP, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
@@ -19,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     ui->doubleSpinBoxCursorI->setValue(0.5);
+    ui->doubleSpinBoxCursorI->setDecimals(4);
     ui->doubleSpinBoxCursorI->setPrefix("I ");
     ui->doubleSpinBoxCursorI->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorI, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
@@ -27,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent)
     });
 
     ui->doubleSpinBoxCursorD->setValue(0.01);
+    ui->doubleSpinBoxCursorD->setDecimals(4);
     ui->doubleSpinBoxCursorD->setPrefix("D ");
     ui->doubleSpinBoxCursorD->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorD, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
@@ -74,18 +77,29 @@ void MainWindow::on_pushButtonGo_clicked()
 void MainWindow::go()
 {
     auto currVal = ui->doubleSpinBoxCursorStart->value();
-    auto target = ui->doubleSpinBoxCursorTarget->value();
+    auto setpoint = ui->doubleSpinBoxCursorTarget->value();
     auto n = 100;
+    auto max = currVal;
+    auto min = currVal;
 
     for (int i = 0; i < n; i++) {
-        qDebug() << currVal << target;
-        double delta = pid->calc(target, currVal);
+        double delta = pid->calc(currVal, setpoint);
         currVal += delta;
+        if (currVal > max) {
+            max = currVal;
+        }
 
-        targetPlot->addData(i+x, target);
+        if (currVal < min) {
+            min = currVal;
+        }
+
+        targetPlot->addData(i+x, setpoint);
         currentValPlot->addData(i+x, currVal);
         deltaPlot->addData(i+x, delta);
     }
     x += n;
-    ui->plot->autoScaleAllAxis();
-}
+
+    ui->plot->qcp()->xAxis->setRange(x-n, x);
+    ui->plot->qcp()->yAxis->setRange(min*1.05, max*1.05);
+    ui->plot->qcp()->replot();
+    }
