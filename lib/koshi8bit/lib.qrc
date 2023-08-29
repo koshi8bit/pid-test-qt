@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/faults">
+        <file>ui/faults/template.html</file>
+    </qresource>
+</RCC>

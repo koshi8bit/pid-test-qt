@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>AbstractPlot</class>
+ <widget class="QWidget" name="AbstractPlot">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>697</width>
+    <height>590</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QSplitter" name="splitter">
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <widget class="QCustomPlot" name="plot" native="true">
+      <property name="toolTip">
+       <string/>
+      </property>
+      <widget class="QWidget" name="widgetToolTip" native="true">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>80</y>
+         <width>51</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Как масштабировать ось:&lt;/span&gt; навести курсор на ось и крутить колесико &lt;span style=&quot; font-style:italic;&quot;&gt;или &lt;/span&gt;сделать двойнок клик на ось и появятся настройки.&lt;br/&gt;Если нажать на правую кнопку мыши (ПКМ), то оси автоматически подстроятся под графики.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Режимы работы графика: &lt;/span&gt;Существует два основных режима: &lt;span style=&quot; font-style:italic;&quot;&gt;realtime&lt;/span&gt; и &lt;span style=&quot; font-style:italic;&quot;&gt;свободный&lt;/span&gt;. Режим изменяется двойным кликом мышки (ЛКМ) по области графика (см рисунок ниже).&lt;br/&gt;&lt;img src=&quot;:/ui/ui-realtimeqcp-mouse-area.PNG&quot;/&gt;&lt;/p&gt;&lt;p&gt;В режиме &lt;span style=&quot; font-style:italic;&quot;&gt;realtime&lt;/span&gt; показывается только последние несколько минут без возможности прокрутки оси времени, сбоку появится буква &lt;span style=&quot; font-style:italic;&quot;&gt;R (Realtime).&lt;br/&gt;&lt;/span&gt;&lt;img src=&quot;:/ui/ui-realtimeqcp-realtime.PNG&quot;/&gt;&lt;br/&gt;В этом режиме нельзя двигать ось времени влево или право, однако можно менять временной диапазон, смотри раздел &lt;span style=&quot; font-style:italic;&quot;&gt;Как масштабировать ось.&lt;br/&gt;&lt;/span&gt;В режиме &lt;span style=&quot; font-style:italic;&quot;&gt;свободный&lt;/span&gt; можно листать график по любым осям без ограничений, буквы &lt;span style=&quot; font-style:italic;&quot;&gt;R&lt;/span&gt; не будет.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Как включить курсор: &lt;/span&gt;нужно нажать правой кнопкой мыши (ПКМ) по области графика, и справа в легенде будет показано значение в позиции курсора.&lt;br/&gt;В этом режиме отображается надпись &lt;span style=&quot; font-style:italic;&quot;&gt;C1(Cursor 1) &lt;/span&gt;сбоку. &lt;br/&gt;&lt;img src=&quot;:/ui/ui-realtimeqcp-cursor0102.PNG&quot;/&gt;&lt;br/&gt;Так же можно активировать второй курсор нажатием на колесико мыши (СКМ) и это дает возможность&lt;br/&gt;посмотреть в легенде разницу между значениями под курсорами.&lt;br/&gt;Режим второго курсора отображается надписью &lt;span style=&quot; font-style:italic;&quot;&gt;C2(Cursor 2)&lt;/span&gt; сбоку.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Легенда: &lt;/span&gt;В легенде можно отключить видимость графика и изменить его цвет. &lt;br/&gt;Сверку показано время. В режиме &lt;span style=&quot; font-style:italic;&quot;&gt;realtime &lt;/span&gt;показывается текущее время.&lt;br/&gt;В режиме &lt;span style=&quot; font-style:italic;&quot;&gt;свободный &lt;/span&gt;показывается время первого курсора &lt;span style=&quot; font-style:italic;&quot;&gt;C1, &lt;/span&gt;а в круглых скобках указана разница между текущим временем и временем курсора&lt;span style=&quot; font-style:italic;&quot;&gt;.&lt;br/&gt;&lt;/span&gt;Когда активны оба курсора &lt;span style=&quot; font-style:italic;&quot;&gt;C1 C2 &lt;/span&gt;- показывается временная разница между курсорами в квадратных скобках.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonHelp">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>30</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Помощь</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../pic/ui-res.qrc">
+         <normaloff>:/ico-custom/ico/custom/ask-question_002.png</normaloff>:/ico-custom/ico/custom/ask-question_002.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonPrintScreenCopy">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>80</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Копировать скриншот в буфер обмена</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../pic/ui-res.qrc">
+         <normaloff>:/ico/web/ico/web/screenshot_002.png</normaloff>:/ico/web/ico/web/screenshot_002.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonPrintScreen">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>55</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Сделать скриншот</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../pic/ui-res.qrc">
+         <normaloff>:/ico/web/ico/web/camera.png</normaloff>:/ico/web/ico/web/camera.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonOptions">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>5</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Настройки</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../pic/ui-res.qrc">
+         <normaloff>:/ico-custom/ico/custom/gears-white.png</normaloff>:/ico-custom/ico/custom/gears-white.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="checkable">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButtonPrintScreenPaint">
+       <property name="geometry">
+        <rect>
+         <x>3</x>
+         <y>105</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="toolTip">
+        <string>Сохранить и открыть в &quot;Paint&quot;</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgba(255, 255, 255, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../../../pic/ui-res.qrc">
+         <normaloff>:/ui/paint.png</normaloff>:/ui/paint.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QScrollArea" name="scrollAreaLegend">
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scrollAreaWidgetContents">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>69</width>
+         <height>570</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>lib/koshi8bit/ui/qcustomplot/qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../../../pic/ui-res.qrc"/>
+ </resources>
+ <connections/>
+</ui>
