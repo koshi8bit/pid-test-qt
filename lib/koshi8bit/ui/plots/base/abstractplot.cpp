@@ -36,6 +36,7 @@ void AbstractPlot::autoScaleAllAxis()
     autoScaleAxis(qcp()->yAxis);
     autoScaleAxis(qcp()->xAxis2);
     autoScaleAxis(qcp()->yAxis2);
+    qcp()->replot();
 }
 
 void AbstractPlot::axisClick(QCPAxis *axis, QCPAxis::SelectablePart part, QMouseEvent *event)

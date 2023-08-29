@@ -19,6 +19,7 @@ public:
     explicit DoubleSpinBoxCursor(QWidget *parent = nullptr);
     void stepBy(int steps) override;
     void keyPressEvent(QKeyEvent *event) override;
+    void setMinMax(double min, double max);
 
 public slots:
     void confirmValue();

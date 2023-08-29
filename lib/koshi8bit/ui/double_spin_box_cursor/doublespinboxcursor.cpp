@@ -60,3 +60,9 @@ void DoubleSpinBoxCursor::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void DoubleSpinBoxCursor::setMinMax(double min, double max)
+{
+    setMinimum(min);
+    setMaximum(max);
+}
+

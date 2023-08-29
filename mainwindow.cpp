@@ -8,11 +8,50 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    pid = new PID(0.1, -100, 100,
-                  ui->doubleSpinBoxP->value(),
-                  ui->doubleSpinBoxI->value(),
-                  ui->doubleSpinBoxD->value());
 
+
+    ui->doubleSpinBoxCursorP->setValue(0.1);
+    ui->doubleSpinBoxCursorP->setPrefix("P ");
+    ui->doubleSpinBoxCursorP->setMinMax(-100, 100);
+    connect(ui->doubleSpinBoxCursorP, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
+        pid->setP(val);
+        go();
+    });
+
+    ui->doubleSpinBoxCursorI->setValue(0.5);
+    ui->doubleSpinBoxCursorI->setPrefix("I ");
+    ui->doubleSpinBoxCursorI->setMinMax(-100, 100);
+    connect(ui->doubleSpinBoxCursorI, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
+        pid->setI(val);
+        go();
+    });
+
+    ui->doubleSpinBoxCursorD->setValue(0.01);
+    ui->doubleSpinBoxCursorD->setPrefix("D ");
+    ui->doubleSpinBoxCursorD->setMinMax(-100, 100);
+    connect(ui->doubleSpinBoxCursorD, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
+        pid->setD(val);
+        go();
+    });
+
+    ui->doubleSpinBoxCursorStart->setValue(20);
+    ui->doubleSpinBoxCursorStart->setPrefix("start: ");
+    ui->doubleSpinBoxCursorStart->setMinMax(-100, 100);
+    connect(ui->doubleSpinBoxCursorStart, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
+        go();
+    });
+
+    ui->doubleSpinBoxCursorTarget->setValue(0);
+    ui->doubleSpinBoxCursorTarget->setPrefix("target: ");
+    ui->doubleSpinBoxCursorTarget->setMinMax(-100, 100);
+    connect(ui->doubleSpinBoxCursorTarget, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
+        go();
+    });
+
+    pid = new PID(0.1, -100, 100,
+                  ui->doubleSpinBoxCursorP->value(),
+                  ui->doubleSpinBoxCursorI->value(),
+                  ui->doubleSpinBoxCursorD->value());
 
 
     targetPlot = ui->plot->addGraph("target", SimpleGraph::line);
@@ -20,12 +59,6 @@ MainWindow::MainWindow(QWidget *parent)
     deltaPlot = ui->plot->addGraph("delta", SimpleGraph::line);
 
     go();
-
-    oneSet(ui->doubleSpinBoxEnd1->value(),
-           ui->doubleSpinBoxEnd2->value());
-
-    ui->plot->autoScaleAllAxis();
-    //ui->plot->setSplitterWidth(200);
 }
 
 MainWindow::~MainWindow()
@@ -38,11 +71,14 @@ void MainWindow::on_pushButtonGo_clicked()
     go();
 }
 
-void MainWindow::oneSet(double start, double target)
+void MainWindow::go()
 {
-    auto currVal = start;
+    auto currVal = ui->doubleSpinBoxCursorStart->value();
+    auto target = ui->doubleSpinBoxCursorTarget->value();
     auto n = 100;
+
     for (int i = 0; i < n; i++) {
+        qDebug() << currVal << target;
         double delta = pid->calc(target, currVal);
         currVal += delta;
 
@@ -51,30 +87,5 @@ void MainWindow::oneSet(double start, double target)
         deltaPlot->addData(i+x, delta);
     }
     x += n;
-}
-
-void MainWindow::go()
-{
-    oneSet(ui->doubleSpinBoxStart->value(),
-           ui->doubleSpinBoxEnd1->value());
     ui->plot->autoScaleAllAxis();
 }
-
-
-void MainWindow::on_doubleSpinBoxP_valueChanged(double arg1)
-{
-    pid->setP(arg1);
-}
-
-
-void MainWindow::on_doubleSpinBoxI_valueChanged(double arg1)
-{
-    pid->setI(arg1);
-}
-
-
-void MainWindow::on_doubleSpinBoxD_valueChanged(double arg1)
-{
-    pid->setD(arg1);
-}
-

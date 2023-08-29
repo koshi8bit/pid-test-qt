@@ -25,11 +25,6 @@ public:
 private slots:
     void on_pushButtonGo_clicked();
 
-    void on_doubleSpinBoxP_valueChanged(double arg1);
-
-    void on_doubleSpinBoxI_valueChanged(double arg1);
-
-    void on_doubleSpinBoxD_valueChanged(double arg1);
 
 private:
     Ui::MainWindow *ui;

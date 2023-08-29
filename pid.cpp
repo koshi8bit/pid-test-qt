@@ -29,7 +29,7 @@ void PID::setD(double d)
 double PID::calc(double start, double setpoint)
 {
     // Calculate error
-    double error = setpoint - start;
+    double error = start - setpoint;
 
     // Proportional term
     double Pout = p * error;
