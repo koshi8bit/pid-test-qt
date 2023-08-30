@@ -26,6 +26,10 @@ private slots:
     void on_pushButtonGo_clicked();
 
 
+    void on_pushButtonReset_clicked();
+
+    void on_pushButtonSwap_clicked();
+
 private:
     Ui::MainWindow *ui;
     PID *pid;

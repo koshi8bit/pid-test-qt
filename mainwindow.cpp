@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->doubleSpinBoxCursorP->setPrefix("P ");
     ui->doubleSpinBoxCursorP->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorP, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
-        pid->setP(val);
+        //pid->setP(val);
         go();
     });
 
@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->doubleSpinBoxCursorI->setPrefix("I ");
     ui->doubleSpinBoxCursorI->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorI, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
-        pid->setI(val);
+        //pid->setI(val);
         go();
     });
 
@@ -33,7 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->doubleSpinBoxCursorD->setPrefix("D ");
     ui->doubleSpinBoxCursorD->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorD, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
-        pid->setD(val);
+        //pid->setD(val);
         go();
     });
 
@@ -82,6 +82,10 @@ void MainWindow::go()
     auto max = currVal;
     auto min = currVal;
 
+    pid->setP(ui->doubleSpinBoxCursorP->value());
+    pid->setI(ui->doubleSpinBoxCursorI->value());
+    pid->setD(ui->doubleSpinBoxCursorD->value());
+
     for (int i = 0; i < n; i++) {
         double delta = pid->calc(currVal, setpoint);
         currVal += delta;
@@ -99,7 +103,27 @@ void MainWindow::go()
     }
     x += n;
 
-    ui->plot->qcp()->xAxis->setRange(x-n, x);
-    ui->plot->qcp()->yAxis->setRange(min*1.05, max*1.05);
-    ui->plot->qcp()->replot();
+    if (ui->checkBoxOnlyLast->isChecked()) {
+        ui->plot->qcp()->xAxis->setRange(x-n, x);
+        ui->plot->qcp()->yAxis->setRange(min*1.05, max*1.05);
     }
+
+    if (ui->checkBoxAutoSwap->isChecked()) {
+        on_pushButtonSwap_clicked();
+    }
+
+    ui->plot->qcp()->replot();
+}
+
+void MainWindow::on_pushButtonReset_clicked()
+{
+    pid->reset();
+}
+
+void MainWindow::on_pushButtonSwap_clicked()
+{
+    auto tmp = ui->doubleSpinBoxCursorStart->value();
+    ui->doubleSpinBoxCursorStart->setValue(ui->doubleSpinBoxCursorTarget->value());
+    ui->doubleSpinBoxCursorTarget->setValue(tmp);
+}
+

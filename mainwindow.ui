@@ -44,6 +44,23 @@
           </property>
          </widget>
         </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonSwap">
+          <property name="text">
+           <string>Swap</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxAutoSwap">
+          <property name="text">
+           <string>Auto swap</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
        </layout>
       </item>
       <item>
@@ -81,11 +98,32 @@
        </layout>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButtonGo">
-        <property name="text">
-         <string>Go</string>
-        </property>
-       </widget>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <item>
+         <widget class="QPushButton" name="pushButtonGo">
+          <property name="text">
+           <string>Go</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="pushButtonReset">
+          <property name="text">
+           <string>Reset</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="checkBoxOnlyLast">
+          <property name="text">
+           <string>Only last</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <spacer name="horizontalSpacer">

@@ -14,7 +14,8 @@ public:
     void setI(double i);
     void setD(double d);
 
-    double calc(double start, double setpoint);
+    double calc(double currentVal, double setpoint);
+    void reset();
 
 
 

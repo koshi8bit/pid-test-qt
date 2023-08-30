@@ -26,34 +26,33 @@ void PID::setD(double d)
     this->d = d;
 }
 
-double PID::calc(double start, double setpoint)
+double PID::calc(double currentVal, double setpoint)
 {
-    // Calculate error
-    double error = setpoint - start;
+    double error = setpoint - currentVal;
 
-    // Proportional term
     double Pout = p * error;
 
-    // Integral term
     integral += error * deltaT;
     double Iout = i * integral;
 
-    // Derivative term
     double derivative = (error - prev_error) / deltaT;
     double Dout = d * derivative;
 
-    // Calculate total output
     double output = Pout + Iout + Dout;
 
-    // Restrict to max/min
     if (output > max)
         output = max;
 
     if (output < min)
         output = min;
 
-    // Save error to previous error
     prev_error = error;
 
     return output;
+}
+
+void PID::reset()
+{
+    prev_error = 0;
+    integral = 0;
 }
