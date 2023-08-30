@@ -26,9 +26,9 @@ void PID::setD(double d)
     this->d = d;
 }
 
-double PID::calc(double currentVal, double setpoint)
+double PID::calc(double currentVal, double target)
 {
-    double error = setpoint - currentVal;
+    double error = target - currentVal;
 
     double Pout = p * error;
 

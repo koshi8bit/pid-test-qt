@@ -28,15 +28,13 @@ private slots:
 
     void on_pushButtonReset_clicked();
 
-    void on_pushButtonSwap_clicked();
-
 private:
     Ui::MainWindow *ui;
     PID *pid;
     void oneSet(double start, double target);
     void go();
     int x=0;
-    SimpleGraph *targetPlot, *currentValPlot, *deltaPlot;
+    SimpleGraph *arcTargetPlot, *arcGetPlot, *arcDeltaPlot, *filamentSetPlot, *filamentTargetPlot, *filamentDeltaPlot;
 };
 
 #endif // MAINWINDOW_H
