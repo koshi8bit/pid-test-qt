@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->doubleSpinBoxCursorP->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorP, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
         //pid->setP(val);
+        Q_UNUSED(val)
         go();
     });
 
@@ -25,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->doubleSpinBoxCursorI->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorI, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
         //pid->setI(val);
+        Q_UNUSED(val)
         go();
     });
 
@@ -34,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->doubleSpinBoxCursorD->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorD, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
         //pid->setD(val);
+        Q_UNUSED(val)
         go();
     });
 
@@ -41,6 +44,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->doubleSpinBoxCursorStart->setPrefix("start: ");
     ui->doubleSpinBoxCursorStart->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorStart, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
+        Q_UNUSED(val)
         go();
     });
 
@@ -48,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->doubleSpinBoxCursorTarget->setPrefix("target: ");
     ui->doubleSpinBoxCursorTarget->setMinMax(-100, 100);
     connect(ui->doubleSpinBoxCursorTarget, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
+        Q_UNUSED(val)
         go();
     });
 
@@ -60,6 +65,7 @@ MainWindow::MainWindow(QWidget *parent)
     targetPlot = ui->plot->addGraph("target", SimpleGraph::line);
     currentValPlot = ui->plot->addGraph("current val", SimpleGraph::line);
     deltaPlot = ui->plot->addGraph("delta", SimpleGraph::line);
+    deltaPlot->setVisible(false);
 
     go();
 }
