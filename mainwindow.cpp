@@ -68,15 +68,8 @@ MainWindow::MainWindow(QWidget *parent)
         go();
     });
 
-    ui->doubleSpinBoxCursorFilamentTarget->setMinMax(0, 400);
-    ui->doubleSpinBoxCursorFilamentTarget->setValue(250);
-    ui->doubleSpinBoxCursorFilamentTarget->setPrefix("Накал цель: ");
-    connect(ui->doubleSpinBoxCursorFilamentTarget, &DoubleSpinBoxCursor::valueConfirmed, [this](double val) {
-        Q_UNUSED(val)
-        go();
-    });
-
     //
+
     pid = new PID(0.1, -100, 100,
                   ui->doubleSpinBoxCursorP->value(),
                   ui->doubleSpinBoxCursorI->value(),
@@ -85,12 +78,11 @@ MainWindow::MainWindow(QWidget *parent)
 
     arcGetPlot = ui->plot->addGraph("Дуга измер.", SimpleGraph::line);
     arcTargetPlot = ui->plot->addGraph("Дуга цель", SimpleGraph::line);
-    filamentSetPlot = ui->plot->addGraph("Накал уст.", SimpleGraph::line);
-    filamentTargetPlot = ui->plot->addGraph("Накал цель.", SimpleGraph::line);
-    filamentDeltaPlot = ui->plot->addGraph("Накал delta", SimpleGraph::line);
-
     arcDeltaPlot = ui->plot->addGraph("Дуга delta (PID input)", SimpleGraph::line);
     arcDeltaPlot->setVisible(false);
+    filamentSetPlot = ui->plot->addGraph("Накал уст.", SimpleGraph::line);
+    filamentDeltaPlot = ui->plot->addGraph("Накал delta", SimpleGraph::line);
+
 
     go();
 }
@@ -109,7 +101,6 @@ void MainWindow::go()
 {
     auto arcDelta = ui->doubleSpinBoxCursorArcTarget->value() -
                     ui->doubleSpinBoxCursorArcGet->value();
-    auto filamentTarget = ui->doubleSpinBoxCursorFilamentTarget->value();
     auto filamentSet = ui->doubleSpinBoxCursorFilamentStart->value();
     auto n = 100;
 //    auto max = currVal;
@@ -120,8 +111,9 @@ void MainWindow::go()
     pid->setD(ui->doubleSpinBoxCursorD->value());
 
     for (int i = 0; i < n; i++) {
-        double deltaFilament = pid->calc(arcDelta, filamentTarget);
-        filamentSet += deltaFilament;
+        double filamentDelta = pid->calc(ui->doubleSpinBoxCursorArcGet->value(),
+                                         ui->doubleSpinBoxCursorArcTarget->value());
+        filamentSet += filamentDelta;
 //        if (deltaArc > max) {
 //            max = currVal;
 //        }
@@ -132,10 +124,9 @@ void MainWindow::go()
 
         arcGetPlot->addData(i+x, ui->doubleSpinBoxCursorArcGet->value());
         arcTargetPlot->addData(i+x, ui->doubleSpinBoxCursorArcTarget->value());
-        filamentSetPlot->addData(i+x, filamentSet);
-        filamentTargetPlot->addData(i+x, ui->doubleSpinBoxCursorArcTarget->value());
         arcDeltaPlot->addData(i+x, arcDelta);
-        filamentDeltaPlot->addData(i+x, deltaFilament);
+        filamentSetPlot->addData(i+x, filamentSet);
+        filamentDeltaPlot->addData(i+x, filamentDelta);
     }
     x += n;
 

@@ -54,16 +54,6 @@
           </property>
          </widget>
         </item>
-        <item>
-         <widget class="DoubleSpinBoxCursor" name="doubleSpinBoxCursorFilamentTarget" native="true">
-          <property name="minimumSize">
-           <size>
-            <width>58</width>
-            <height>21</height>
-           </size>
-          </property>
-         </widget>
-        </item>
        </layout>
       </item>
       <item>
@@ -154,7 +144,7 @@
      <x>0</x>
      <y>0</y>
      <width>1107</width>
-     <height>20</height>
+     <height>16</height>
     </rect>
    </property>
   </widget>

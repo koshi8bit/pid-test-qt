@@ -29,7 +29,6 @@ void PID::setD(double d)
 double PID::calc(double currentVal, double target)
 {
     double error = target - currentVal;
-
     double Pout = p * error;
 
     integral += error * deltaT;

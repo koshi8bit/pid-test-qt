@@ -34,7 +34,7 @@ private:
     void oneSet(double start, double target);
     void go();
     int x=0;
-    SimpleGraph *arcTargetPlot, *arcGetPlot, *arcDeltaPlot, *filamentSetPlot, *filamentTargetPlot, *filamentDeltaPlot;
+    SimpleGraph *arcTargetPlot, *arcGetPlot, *arcDeltaPlot, *filamentSetPlot, *filamentDeltaPlot;
 };
 
 #endif // MAINWINDOW_H
